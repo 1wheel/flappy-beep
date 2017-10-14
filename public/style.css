@@ -1,7 +1,7 @@
 body{
   font-family: monaco, Consolas, 'Lucida Console', monospace; 
   margin: 0px;
-  background: #ff0;
+  background: #f0f;
   user-select: none; 
 }
 
@@ -52,4 +52,16 @@ text{
 
 .graph{
   pointer-events: none;
+}
+
+
+.score{
+  font-size: 80px;
+  margin-top: 40vh;
+  margin-left: 0vw;
+  text-align: center;
+
+}
+.url{
+  font-size: 4vw;
 }

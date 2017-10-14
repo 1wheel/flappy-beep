@@ -31,20 +31,19 @@ var myBird = birds[id]
 
 var scoreToVolume = d3.scaleLinear().domain([0, 100])
 
-
-
-// var blocks = d3.range(20).map(i => {
-//   return [i/20, ((31 - i*2) % 20)/20]
-// })
-
 var b0 = b0 || d3.range(3, 7) .map(i => [0/3, s*i])
 var b1 = b1 || d3.range(0, 4) .map(i => [1/3, s*i])
 var b2 = b2 || d3.range(4, 10).map(i => [2/3, s*i])
 var blocks = blocks || _.flatten([b0, b1, b2])
 
-// b0.forEach((d, i) => d[1] = .9+ i*s)
-// b1.forEach((d, i) => d[1] = .8+ i*s)
-// b2.forEach((d, i) => d[1] = 1 - .7+ i*s)
+// b0.forEach((d, i) =>{ d[1] = .9+ i*s; d[0] = 0/3 })
+// b1.forEach((d, i) =>{ d[1] = .8+ i*s; d[0] = 1/3 })
+// b2.forEach((d, i) =>{ d[1] = .7+ i*s; d[0] = 2/3 })
+
+
+// var blocks = d3.range(20).map(i => {
+//   return [i/20, ((31 - i*2) % 20)/20]
+// })
 
 
 var oldT = 0
@@ -85,11 +84,13 @@ timer = d3.timer(t => {
       if (block[0] < s && -s < yDif && yDif < s) d.hit = true
     })
     if (d.hit){
-      if (!wasHit) playNote(d, 'hit')
+      if (!wasHit){
+        playNote(d, 'hit')
+        d.dy = 0
+        d.score = 0
+        d.y = spawnY
+      }
 
-      // d.y = spawnY
-      // d.dy = 0
-      d.score = 0
     }
 
     d.dy += gravity*dt
@@ -104,6 +105,8 @@ timer = d3.timer(t => {
 
     if (d == myBird){
       textSel.text(d.score)
+      textSel.append('div.url')
+        .text('roadtolarissa.com/flappy-beep')
 
       ctx.beginPath()
       ctx.strokeStyle = '#000'
@@ -122,7 +125,7 @@ d3.select(window).on('mousedown touchstart', _.throttle(() => {
   myBird.dy = jumpAccel
 
   ws.send(JSON.stringify(myBird))
-}, 500, {trailing: false}))
+}, 300, {trailing: false}))
 
 
 
