@@ -24,7 +24,18 @@ process.on('uncaughtException', (err =>
 var wss = new SocketServer({ server })
 wss.on('connection', (ws) => {
   console.log('client connected')
-  ws.on('close', () => console.log('client disconnected'))
+  var bird = null
+
+  ws.on('close', () => {
+    console.log('client disconnected')
+    if (!bird) return
+    sendToAllClients({type: 'died', bird})
+  })
+
+  ws.on('message', d => {
+    bird = JSON.parse(d)
+    sendToAllClients({type: 'jump', bird})
+  })
 })
 
 

@@ -2,6 +2,7 @@ body{
   font-family: monaco, Consolas, 'Lucida Console', monospace; 
   margin: 0px;
   background: #ff0;
+  user-select: none; 
 }
 
 canvas{

@@ -3,6 +3,8 @@ flappy bird but with beeping
 
 [-click here-](http://45.55.134.216:3989/)
 
+http://shoutkey.com/shade
+
 # todo
 
 - add sounds (louder on higher score?)
