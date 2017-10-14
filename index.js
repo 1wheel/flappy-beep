@@ -48,10 +48,8 @@ function sendToAllClients(msg){
 }
 
 
-console.log('hiii')
 var i = 0
 setInterval(() => {
-  console.log(i)
   i++
   sendToAllClients({type: 'count', i})
-}, 100)
+}, 2000)

@@ -1,4 +1,5 @@
-// console.clear()
+console.clear()
+
 
 d3.select('body').selectAppend('div.tooltip')
 
@@ -8,11 +9,20 @@ var c = d3.conventions({sel, height: innerHeight, layers: 'dc', margin: {left: 0
 var {width, height, layers: [div, ctx]} = c
 var textSel = div.append('div.score')
 
-var s = .1
-var score = 0
-var bY = .5
-var bDY = 0
+var s = .1  // block size
+var spawnY = .5   
 var gravity = .000036
+
+var id = Math.random() + ''
+var birds = birds || {id: {
+  score: 0,
+  y: spawnY,
+  dy: 0,
+  id
+}}
+
+var myBird = birds[id]
+
 
 
 var topBlocks = d3.range(4).map(i => [.2, s*i])
@@ -37,25 +47,29 @@ timer = d3.timer(t => {
   ctx.fill()
 
 
-  score++
+  d3.values(birds).forEach(d => {
+    d.score++
 
-  var hit = false
-  blocks.forEach(d => {
-    var dy = bY - d[1]
-    if (d[0] < s && -s < dy && dy < s) hit = true
+    var hit = false
+    blocks.forEach(block => {
+      var yDif = d.y - block[1]
+      if (block[0] < s && -s < yDif && yDif < s) hit = true
+    })
+    if (hit){
+      d.y = spawnY
+      d.dy = 0
+      d.score = 0
+    }
+
+    d.dy += gravity*dt
+    d.y  +=  d.dy
+    d.y = d3.clamp(-1, d.y, 1 - s)
+    if (d.y == 1 - s) d.dy = Math.max(d.dy, 0) 
+    
+    if (d == myBird){
+      textSel.text(d.score)
+    }
   })
-  if (hit){
-    // console.log('hit')
-    bY = .5
-    bDY = 0
-    score = 0
-  }
-
-  textSel.text(score)
-  bDY += gravity*dt
-  bY  +=  bDY
-  bY = d3.clamp(-1, bY, 1 - s)
-  if (bY == 1 - s) bDY = Math.max(bDY, 0) 
 
   ctx.beginPath()
   ctx.fillStyle = '#f00'
@@ -65,8 +79,12 @@ timer = d3.timer(t => {
 
 
 d3.select(window).on('mousedown touchstart', () => {
-  if (bY < 0) return
-  bDY = -.02
+  if (myBird.y < 0) return
+  myBird.dy = -.02
+
+  d3.event.preventDefault()
+
+  // post
 })
 
 

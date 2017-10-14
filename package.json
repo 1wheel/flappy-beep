@@ -6,13 +6,14 @@
   "author": "Adam Pearce <1wheel@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "local-watch": "entr ?? npm run publish",
-    "publish": "cd .. && rsync -a --omit-dir-times --no-perms --exclude flappy-beep/ demo@roadtolarissa.com:../../usr/share/nginx/html/flappy-beep/"
+    "local-watch": "ls **/*.* | entr yarn run publish",
+    "publish": "cd .. && rsync -a --omit-dir-times --no-perms --exclude node_modules flappy-beep/ demo@roadtolarissa.com:../../usr/share/nginx/html/flappy-beep/"
   },
   "dependencies": {
     "chokidar": "^1.7.0",
     "express": "^4.16.2",
     "expresss": "^0.0.0",
+    "minimist": "^1.2.0",
     "serve-index": "^1.9.1",
     "serve-static": "^1.13.1",
     "ws": "^3.2.0"

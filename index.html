@@ -10,7 +10,9 @@
 
 <!-- hot-server appends this snippit to inject code via a websock  -->
 <script>
-window.ws = new WebSocket(location.origin.replace(/^http/, 'ws'))
+var wsPath = location.origin.replace(/^http/, 'ws')
+if (wsPath.includes('roadtolarissa')) wsPath = 'ws://45.55.134.216:3989'
+window.ws = new WebSocket(wsPath)
 
 ws.onmessage = function(msg) {
   var parsedData = JSON.parse(msg.data)
