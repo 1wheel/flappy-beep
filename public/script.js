@@ -13,16 +13,18 @@ var s = .1  // block size
 var spawnY = .5   
 var gravity = .000036
 
-var id = Math.random() + ''
-var birds = birds || {id: {
-  score: 0,
-  y: spawnY,
-  dy: 0,
-  id
-}}
+var id = id || Math.random() + ''
 
+if (!birds){
+  var birds = {}
+  birds[id] = {
+    score: 0,
+    y: spawnY,
+    dy: 0,
+    id
+  }
+}
 var myBird = birds[id]
-
 
 
 var topBlocks = d3.range(4).map(i => [.2, s*i])
@@ -66,15 +68,16 @@ timer = d3.timer(t => {
     d.y = d3.clamp(-1, d.y, 1 - s)
     if (d.y == 1 - s) d.dy = Math.max(d.dy, 0) 
     
+    ctx.beginPath()
+    ctx.fillStyle = '#f00'
+    ctx.rect(s*.1*width, d.y*height, s*.9*width, s*.9*height)
+    ctx.fill()
+
     if (d == myBird){
       textSel.text(d.score)
     }
   })
 
-  ctx.beginPath()
-  ctx.fillStyle = '#f00'
-  ctx.rect(s*.1*width, bY*height, s*.9*width, s*.9*height)
-  ctx.fill()
 })
 
 
