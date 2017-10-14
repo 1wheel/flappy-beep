@@ -1,0 +1,12 @@
+{
+  "name": "flappy-beep",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:1wheel/flappy-beep.git",
+  "author": "Adam Pearce <1wheel@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+  	"local-watch": "entr ?? npm run publish",
+  	"publish": "cd .. && rsync -a --omit-dir-times --no-perms --exclude flappy-beep/ demo@roadtolarissa.com:../../usr/share/nginx/html/flappy-beep/",
+  }
+}
