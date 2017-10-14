@@ -1,4 +1,4 @@
-console.clear()
+// console.clear()
 
 d3.select('body').selectAppend('div.tooltip')
 
@@ -17,7 +17,7 @@ var gravity = .000036
 
 var topBlocks = d3.range(4).map(i => [.2, s*i])
 var botBlocks = d3.range(4, 10).map(i => [.6, s*i])
-var blocks = topBlocks.concat(botBlocks)
+var blocks = blocks || topBlocks.concat(botBlocks)
 
 var oldT = 0
 if (window.timer) timer.stop()
@@ -28,7 +28,7 @@ timer = d3.timer(t => {
   ctx.clearRect(0, 0, width, height)
 
   ctx.beginPath()
-  ctx.fillStyle = '#0f0'
+  ctx.fillStyle = '#0ff'
   blocks.forEach(d => {
     d[0] += dt*-.0001
     if (d[0] < -s) d[0] = 1
@@ -45,7 +45,7 @@ timer = d3.timer(t => {
     if (d[0] < s && -s < dy && dy < s) hit = true
   })
   if (hit){
-    console.log('hit')
+    // console.log('hit')
     bY = .5
     bDY = 0
     score = 0
@@ -58,7 +58,7 @@ timer = d3.timer(t => {
   if (bY == 1 - s) bDY = Math.max(bDY, 0) 
 
   ctx.beginPath()
-  ctx.fillStyle = '#f0f'
+  ctx.fillStyle = '#f00'
   ctx.rect(s*.1*width, bY*height, s*.9*width, s*.9*height)
   ctx.fill()
 })
@@ -68,3 +68,10 @@ d3.select(window).on('mousedown touchstart', () => {
   if (bY < 0) return
   bDY = -.02
 })
+
+
+
+
+function wsMessage(msg){
+  console.log(msg)
+}
