@@ -13,7 +13,12 @@
 <!-- hot-server appends this snippit to inject code via a websock  -->
 <script>
 var wsPath = location.origin.replace(/^http/, 'ws')
-if (wsPath.includes('roadtolarissa')) wsPath = 'ws://45.55.134.216:3989'
+if (wsPath.includes('roadtolarissa')){
+	wsPath = 'ws://45.55.134.216:3989'
+	window.location = 'http://45.55.134.216:3989'
+}
+
+
 window.ws = new WebSocket(wsPath)
 
 ws.onmessage = function(msg) {
@@ -41,4 +46,5 @@ ws.onmessage = function(msg) {
 
 
 <script src='public/d3_.js'></script>
+<script src='public/sound.js'></script>
 <script src='public/script.js'></script>
