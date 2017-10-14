@@ -29,16 +29,15 @@ if (!birds){
 var myBird = birds[id]
 
 
-var topBlocks = topBlocks || d3.range(4).map(i => [.2, s*i])
-var botBlocks = botBlocks || d3.range(4, 10).map(i => [.6, s*i])
-var blocks = blocks || topBlocks.concat(botBlocks)
+var b0 = b0 || d3.range(3, 7) .map(i => [0/3, s*i])
+var b1 = b1 || d3.range(0, 4) .map(i => [1/3, s*i])
+var b2 = b2 || d3.range(4, 10).map(i => [2/3, s*i])
+var blocks = blocks || _.flatten([b0, b1, b2])
 
-topBlocks.forEach((d, i) => {
-  d[1] = .7 + i*s
-})
-botBlocks.forEach((d, i) => {
-  d[1] = .7 + i*s
-})
+b0.forEach((d, i) => d[1] = .9 + i*s)
+b1.forEach((d, i) => d[1] = .8 + i*s)
+b2.forEach((d, i) => d[1] = .7 + i*s)
+
 
 var oldT = 0
 if (window.timer) timer.stop()
