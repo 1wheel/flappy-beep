@@ -1,9 +1,7 @@
 # flappy-beep
 flappy bird but with beeping 
 
-[-click here-](http://45.55.134.216:3989/)
-
-http://shoutkey.com/shade
+https://roadtolarissa.com/flappy-beep
 
 # todo
 

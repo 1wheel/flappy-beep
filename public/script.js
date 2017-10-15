@@ -9,10 +9,10 @@ var c = d3.conventions({sel, height: innerHeight, layers: 'dc', margin: {left: 0
 var {width, height, layers: [div, ctx]} = c
 var textSel = div.append('div.score')
 
-var s = .1  // block size
+var s = .1  // block size TWEAK
 var spawnY = 1  
 var gravity = .000036
-var jumpAccel = -.015
+var jumpAccel = -.02 //TWEAK
 
 var id = id || Math.random() + ''
 
@@ -42,7 +42,10 @@ var blocks = blocks || _.flatten([b0, b1, b2])
 
 
 // var blocks = d3.range(20).map(i => {
-//   return [i/20, ((31 - i*2) % 20)/20]
+//   return [i/20, ((i*6) % 20)/20]
+// })
+// var blocks = d3.range(20).map(i => {
+//   return [i/20, ((31 - i*7) % 20)/20]
 // })
 
 
@@ -87,8 +90,8 @@ timer = d3.timer(t => {
       if (!wasHit){
         playNote(d, 'hit')
         d.dy = 0
+        // d.y = spawnY
         d.score = 0
-        d.y = spawnY
       }
 
     }
@@ -106,6 +109,11 @@ timer = d3.timer(t => {
     if (d == myBird){
       textSel.text(d.score)
       textSel.append('div.url')
+        .text('Tap the screen!')
+      textSel.append('br')
+
+      // TWEAK
+      textSel.append('div.url')
         .text('roadtolarissa.com/flappy-beep')
 
       ctx.beginPath()
@@ -121,6 +129,8 @@ timer = d3.timer(t => {
 
 d3.select(window).on('mousedown touchstart', _.throttle(() => {
   if (myBird.y < 0) return
+  // TWEAK
+  // if (myBird.y <.9) return
   // if (myBird.hit) return
   myBird.dy = jumpAccel
 
@@ -151,7 +161,7 @@ function playNote(d, type){
   var waveform = type == 'ypos' ? 'sawtooth' : 'sine'
   if (type == 'wrap'){
     frequency = pitches[Math.round(d[1]/s/2)]
-    frequency = 100
+    frequency = 200
     volume = 1
   }
 

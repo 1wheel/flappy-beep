@@ -5,6 +5,14 @@ body{
   user-select: none; 
 }
 
+body, .octo-arm, .octo-body{
+  background: #ff0;
+  color: #ff0;
+
+  background: #f0f !important;
+  color: #f0f !important;
+}
+
 canvas{
   position: absolute;
   top: 0px;
@@ -57,9 +65,10 @@ text{
 
 .score{
   font-size: 80px;
-  margin-top: 40vh;
+  margin-top: 30vh;
   margin-left: 0vw;
   text-align: center;
+  color: #000;
 
 }
 .url{
