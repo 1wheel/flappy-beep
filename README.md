@@ -10,4 +10,6 @@ https://roadtolarissa.com/flappy-beep
 - ws sync of bird position and speed and block pos
 - sync render frame code over ws (how? chokdir locally, rsync to sever/chokdir again/ws?)
 
-
+- post?
+- code editor on page?
+- ws port forwarding
